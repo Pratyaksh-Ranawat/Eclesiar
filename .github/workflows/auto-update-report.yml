@@ -35,7 +35,7 @@ jobs:
           EOF
 
       - name: Refresh data and rebuild docs
-        run: python update_all_reports.py --quiet
+        run: python update_all_reports.py --quiet --allow-fetch-failure
 
       - name: Commit updated hosted files
         shell: bash

@@ -67,6 +67,11 @@ def parse_args():
         default="Update hosted NPC report",
         help="Commit message to use when --publish creates a commit.",
     )
+    parser.add_argument(
+        "--allow-fetch-failure",
+        action="store_true",
+        help="If region-page fetching fails, keep the last good workforce bundle instead of exiting with an error.",
+    )
     return parser.parse_args()
 
 
@@ -76,6 +81,13 @@ def run_step(step_number: int, total_steps: int, command: list[str], label: str)
     completed = subprocess.run(command)
     if completed.returncode != 0:
         raise SystemExit(completed.returncode)
+
+
+def run_step_result(step_number: int, total_steps: int, command: list[str], label: str) -> int:
+    print(f"[{step_number}/{total_steps}] {label}", flush=True)
+    print(" ", " ".join(shlex.quote(part) for part in command), flush=True)
+    completed = subprocess.run(command)
+    return completed.returncode
 
 
 def run_capture(command: list[str]) -> str:
@@ -148,22 +160,46 @@ def main() -> int:
         total_steps += 4
 
     run_step(1, total_steps, generate_cmd, "Generate base U.S. NPC transaction report")
-    run_step(2, total_steps, fetch_cmd, "Fetch authenticated U.S. region workforce pages")
-    run_step(3, total_steps, extract_cmd, "Extract civilians, merge workforce data, and rebuild purchase ledger")
+    fetch_failed = False
+    fetch_result = run_step_result(2, total_steps, fetch_cmd, "Fetch authenticated U.S. region workforce pages")
+    if fetch_result != 0:
+        if not args.allow_fetch_failure:
+            raise SystemExit(fetch_result)
+        fetch_failed = True
+        print(
+            "  Region-page fetch failed. Keeping the last good workforce bundle and skipping extract/build steps.",
+            flush=True,
+        )
+
+    if not fetch_failed:
+        run_step(3, total_steps, extract_cmd, "Extract civilians, merge workforce data, and rebuild purchase ledger")
+    else:
+        print(f"[3/{total_steps}] Extract civilians, merge workforce data, and rebuild purchase ledger", flush=True)
+        print("  Skipped because region-page fetching failed.", flush=True)
 
     next_step = 4
-    if not args.skip_site_build:
+    if not args.skip_site_build and not fetch_failed:
         site_cmd = [sys.executable, "-u", "build_host_bundle.py"]
         run_step(next_step, total_steps, site_cmd, "Build static hosting bundle")
+        next_step += 1
+    elif not args.skip_site_build:
+        print(f"[{next_step}/{total_steps}] Build static hosting bundle", flush=True)
+        print("  Skipped to avoid overwriting the last good hosted workforce report.", flush=True)
         next_step += 1
 
     if args.publish:
         publish_changes(args, next_step, total_steps)
 
     if args.publish:
-        print("Done. Local reports, docs bundle, and GitHub Pages content were all refreshed.")
+        if fetch_failed:
+            print("Done. API data refreshed; hosted workforce report was left unchanged because region fetching failed.")
+        else:
+            print("Done. Local reports, docs bundle, and GitHub Pages content were all refreshed.")
     else:
-        print("Done. Open npc_work_report.html to review locally, or publish the docs folder with GitHub Pages.")
+        if fetch_failed:
+            print("Done. API data refreshed locally; workforce rebuild was skipped because region fetching failed.")
+        else:
+            print("Done. Open npc_work_report.html to review locally, or publish the docs folder with GitHub Pages.")
     return 0
 
 
