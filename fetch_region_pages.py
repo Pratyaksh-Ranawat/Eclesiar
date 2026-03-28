@@ -68,6 +68,20 @@ def fetch_region(region_id: int, headers: dict[str, str]) -> str:
         return response.read().decode("utf-8", errors="ignore")
 
 
+def validate_region_html(region_id: int, html: str) -> None:
+    required_markers = [
+        "Civilians:",
+        "Working in",
+        "Current wage",
+    ]
+    missing = [marker for marker in required_markers if marker not in html]
+    if missing:
+        missing_list = ", ".join(missing)
+        raise RuntimeError(
+            f"Fetched HTML for region {region_id} did not look like a valid workforce page. Missing markers: {missing_list}"
+        )
+
+
 def main() -> int:
     load_dotenv()
     args = parse_args()
@@ -87,11 +101,15 @@ def main() -> int:
         path = OUTPUT_DIR / f"region_{region_id}.html"
         try:
             html = fetch_region(region_id, headers)
+            validate_region_html(region_id, html)
         except HTTPError as exc:
             print(f"HTTP {exc.code} while fetching region {region_id}", file=sys.stderr)
             return 1
         except URLError as exc:
             print(f"Network error while fetching region {region_id}: {exc.reason}", file=sys.stderr)
+            return 1
+        except RuntimeError as exc:
+            print(str(exc), file=sys.stderr)
             return 1
 
         path.write_text(html, encoding="utf-8")

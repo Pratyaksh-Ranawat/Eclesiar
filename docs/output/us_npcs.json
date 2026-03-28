@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "generated_at": "2026-03-28T15:42:03+00:00",
+=======
+  "generated_at": "2026-03-28T15:51:19+00:00",
+>>>>>>> Stashed changes
   "country": {
     "id": 3,
     "name": "United States of America",

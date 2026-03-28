@@ -1,6 +1,11 @@
 {
+<<<<<<< Updated upstream
   "generated_at": "2026-03-28T15:42:03+00:00",
   "source_report": "output/us_npcs.json",
+=======
+  "generated_at": "2026-03-28T15:51:19+00:00",
+  "source_report": "output\\us_npcs.json",
+>>>>>>> Stashed changes
   "nationality_id": 3,
   "nationality_name": "United States of America",
   "count": 2,
