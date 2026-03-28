@@ -125,6 +125,20 @@
       margin-top: 18px;
     }
 
+    .note-card {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .note-card strong {
+      color: var(--text);
+    }
+
     .toolbar input,
     .toolbar select {
       width: 100%;
@@ -384,6 +398,7 @@
         A simpler view of the U.S. NPC workforce: NPC number, name, region, employer, wage, and a compact purchase snapshot for the latest captured market activity.
       </p>
       <div class="stats" id="stats"></div>
+      <div class="note-card" id="summaryNote">Loading workforce summary...</div>
     </section>
 
     <div class="toolbar">
@@ -439,6 +454,7 @@
 
     const rowsEl = document.getElementById("rows");
     const statsEl = document.getElementById("stats");
+    const summaryNoteEl = document.getElementById("summaryNote");
     const employersEl = document.getElementById("employers");
     const regionsEl = document.getElementById("regions");
     const wagesEl = document.getElementById("wages");
@@ -487,13 +503,17 @@
       const uniqueEmployers = new Set(data.map((row) => row.working_in)).size;
       const uniqueRegions = new Set(data.map((row) => regionLabel(row))).size;
       const withPurchases = data.filter((row) => (row.recent_market_purchase_count || 0) > 0).length;
+      const employedWorkers = data.length;
+      const totalWorkers = 32;
+      const unemployedWorkers = Math.max(0, totalWorkers - employedWorkers);
 
       const cards = [
-        ["Workers", data.length],
+        ["Total NPCs", totalWorkers],
+        ["Employed", employedWorkers],
+        ["Unemployed", unemployedWorkers],
         ["Average Wage", Number.isFinite(avgWage) ? avgWage.toFixed(2) : "n/a"],
         ["Employers", uniqueEmployers],
         ["Regions", uniqueRegions],
-        ["Workers With Purchases", withPurchases],
       ];
 
       statsEl.innerHTML = cards.map(([label, value]) => `
@@ -502,6 +522,12 @@
           <div class="value">${escapeHtml(value)}</div>
         </div>
       `).join("");
+
+      summaryNoteEl.innerHTML = `
+        <strong>Why 31 workers instead of 32?</strong><br>
+        The U.S. currently has 32 NPCs in total, but only 31 appear in the workforce tables because 1 NPC is unemployed and therefore does not show up in the "Working in / Current wage" region list.
+        ${withPurchases} of the employed workers also have recent market-purchase data in the captured transaction window.
+      `;
     }
 
     function renderSidebar(data) {

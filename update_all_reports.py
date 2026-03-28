@@ -71,8 +71,8 @@ def parse_args():
 
 
 def run_step(step_number: int, total_steps: int, command: list[str], label: str) -> None:
-    print(f"[{step_number}/{total_steps}] {label}")
-    print(" ", " ".join(shlex.quote(part) for part in command))
+    print(f"[{step_number}/{total_steps}] {label}", flush=True)
+    print(" ", " ".join(shlex.quote(part) for part in command), flush=True)
     completed = subprocess.run(command)
     if completed.returncode != 0:
         raise SystemExit(completed.returncode)
@@ -132,16 +132,16 @@ def publish_changes(args, step_number: int, total_steps: int) -> None:
 def main() -> int:
     args = parse_args()
 
-    generate_cmd = [sys.executable, "generate_us_npc_report.py", "--max-pages", str(args.max_pages)]
+    generate_cmd = [sys.executable, "-u", "generate_us_npc_report.py", "--max-pages", str(args.max_pages)]
     if not args.quiet:
         generate_cmd.append("--verbose")
 
-    fetch_cmd = [sys.executable, "fetch_region_pages.py", "--delay", str(args.fetch_delay)]
+    fetch_cmd = [sys.executable, "-u", "fetch_region_pages.py", "--delay", str(args.fetch_delay)]
     if args.regions:
         fetch_cmd.append("--regions")
         fetch_cmd.extend(str(region_id) for region_id in args.regions)
 
-    extract_cmd = [sys.executable, "extract_region_civilians.py"]
+    extract_cmd = [sys.executable, "-u", "extract_region_civilians.py"]
 
     total_steps = 3 if args.skip_site_build else 4
     if args.publish:
@@ -153,7 +153,7 @@ def main() -> int:
 
     next_step = 4
     if not args.skip_site_build:
-        site_cmd = [sys.executable, "build_host_bundle.py"]
+        site_cmd = [sys.executable, "-u", "build_host_bundle.py"]
         run_step(next_step, total_steps, site_cmd, "Build static hosting bundle")
         next_step += 1
 

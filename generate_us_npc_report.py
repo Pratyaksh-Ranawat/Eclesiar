@@ -1,5 +1,6 @@
 import json
 import os
+import socket
 import sys
 import time
 from argparse import ArgumentParser
@@ -19,6 +20,8 @@ OUTPUT_JSON = OUTPUT_DIR / "us_npcs.json"
 OUTPUT_USA_NATIONALITY_JSON = OUTPUT_DIR / "usa_nationality_npcs.json"
 MAX_TRANSACTION_PAGES = 50
 REQUEST_DELAY_SECONDS = 0.15
+REQUEST_TIMEOUT_SECONDS = 30
+MAX_RETRIES = 3
 
 
 def load_dotenv(path: Path = Path(".env")) -> None:
@@ -41,22 +44,29 @@ def fetch_json(path: str, api_key: str, params: dict[str, Any] | None = None) ->
     if params:
         url = f"{url}?{urlencode(params)}"
 
-    request = Request(
-        url,
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Accept": "application/json",
-            "User-Agent": "eclesiar-us-npc-report/1.0",
-        },
-    )
+    for attempt in range(1, MAX_RETRIES + 1):
+        request = Request(
+            url,
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Accept": "application/json",
+                "User-Agent": "eclesiar-us-npc-report/1.0",
+            },
+        )
 
-    try:
-        with urlopen(request, timeout=30) as response:
-            return json.loads(response.read().decode("utf-8"))
-    except HTTPError as exc:
-        raise RuntimeError(f"HTTP {exc.code} for {url}") from exc
-    except URLError as exc:
-        raise RuntimeError(f"Network error for {url}: {exc.reason}") from exc
+        try:
+            with urlopen(request, timeout=REQUEST_TIMEOUT_SECONDS) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except HTTPError as exc:
+            raise RuntimeError(f"HTTP {exc.code} for {url}") from exc
+        except (TimeoutError, socket.timeout) as exc:
+            if attempt == MAX_RETRIES:
+                raise RuntimeError(f"Timed out for {url} after {MAX_RETRIES} attempts") from exc
+            time.sleep(0.6 * attempt)
+        except URLError as exc:
+            if attempt == MAX_RETRIES:
+                raise RuntimeError(f"Network error for {url}: {exc.reason}") from exc
+            time.sleep(0.6 * attempt)
 
 
 def normalize_description(text: str) -> str:
@@ -129,10 +139,14 @@ def main() -> int:
     us_region_ids = {row["id"] for row in regions}
     total_npcs_expected = sum(int(row["nb_npcs"]) for row in regions)
     global_region_lookup: dict[int, dict[str, Any]] = {}
-    for country_row in countries:
+    eligible_countries = [row for row in countries if row["id"] < 10000]
+    if args.verbose:
+        print(
+            f"Building global region lookup for {len(eligible_countries)} countries before scanning transaction pages...",
+            flush=True,
+        )
+    for index, country_row in enumerate(eligible_countries, start=1):
         country_row_id = country_row["id"]
-        if country_row_id >= 10000:
-            continue
 
         try:
             region_rows = fetch_json("/country/regions", api_key, {"country_id": country_row_id}).get("data", [])
@@ -149,11 +163,20 @@ def main() -> int:
                 "region_country_name": country_row["name"],
             }
 
+        if args.verbose and (index == 1 or index % 25 == 0 or index == len(eligible_countries)):
+            print(
+                f"region-lookup={index}/{len(eligible_countries)} known_regions={len(global_region_lookup)}",
+                flush=True,
+            )
+
         time.sleep(REQUEST_DELAY_SECONDS)
 
     npc_tx: dict[int, list[dict[str, Any]]] = defaultdict(list)
     observed_us_npcs = set()
     checked_accounts = {}
+
+    if args.verbose:
+        print(f"Scanning up to {args.max_pages} U.S. transaction pages...", flush=True)
 
     for page in range(1, args.max_pages + 1):
         tx_response = fetch_json(
@@ -183,7 +206,8 @@ def main() -> int:
         if args.verbose and (page == 1 or page % 10 == 0):
             print(
                 f"page={page} scanned_candidates={len(checked_accounts)} "
-                f"observed_us_npcs={len(observed_us_npcs)} expected_region_npcs={total_npcs_expected}"
+                f"observed_us_npcs={len(observed_us_npcs)} expected_region_npcs={total_npcs_expected}",
+                flush=True,
             )
 
         time.sleep(REQUEST_DELAY_SECONDS)
@@ -282,7 +306,8 @@ def main() -> int:
     OUTPUT_USA_NATIONALITY_JSON.write_text(json.dumps(usa_nationality_payload, indent=2), encoding="utf-8")
     print(
         f"Wrote {OUTPUT_JSON} with {len(records)} NPC records and "
-        f"{OUTPUT_USA_NATIONALITY_JSON} with {usa_nationality_payload['count']} USA-nationality NPC records."
+        f"{OUTPUT_USA_NATIONALITY_JSON} with {usa_nationality_payload['count']} USA-nationality NPC records.",
+        flush=True,
     )
     return 0
 
