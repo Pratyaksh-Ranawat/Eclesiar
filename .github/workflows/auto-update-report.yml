@@ -1,0 +1,51 @@
+name: Auto Update NPC Report
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-update-npc-report
+  cancel-in-progress: false
+
+jobs:
+  refresh-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Write runtime secrets
+        shell: bash
+        run: |
+          cat > .env <<'EOF'
+          ECLESIAR_API_KEY=${{ secrets.ECLESIAR_API_KEY }}
+          ECLESIAR_SESSION_COOKIE=${{ secrets.ECLESIAR_SESSION_COOKIE }}
+          EOF
+
+      - name: Refresh data and rebuild docs
+        run: python update_all_reports.py --quiet
+
+      - name: Commit updated hosted files
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "No docs changes to commit."
+          else
+            git commit -m "Auto-update hosted NPC report"
+            git push
+          fi
