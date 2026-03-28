@@ -6,39 +6,44 @@
   <title>US NPC Workforce Report</title>
   <style>
     :root {
-      --bg: #0e1726;
-      --panel: rgba(14, 23, 38, 0.84);
-      --panel-2: rgba(18, 31, 52, 0.9);
-      --line: rgba(155, 182, 216, 0.18);
-      --text: #edf4ff;
-      --muted: #9fb2cb;
-      --accent: #9dd8ff;
-      --accent-2: #ffd89b;
-      --ok: #89e2a8;
-      --warn: #ffbf70;
-      --danger: #ff8d8d;
-      --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+      --bg: #0b1220;
+      --bg-2: #10192d;
+      --panel: rgba(12, 21, 36, 0.92);
+      --panel-2: rgba(19, 31, 51, 0.92);
+      --line: rgba(148, 180, 224, 0.16);
+      --text: #ecf3ff;
+      --muted: #9fb1ca;
+      --accent: #82cfff;
+      --accent-2: #ffd38b;
+      --ok: #82dea2;
+      --shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       color: var(--text);
       font-family: "Segoe UI", system-ui, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(94, 194, 255, 0.16), transparent 24%),
-        radial-gradient(circle at top right, rgba(255, 195, 109, 0.14), transparent 26%),
-        linear-gradient(180deg, #0c1421 0%, var(--bg) 100%);
+        radial-gradient(circle at top left, rgba(84, 182, 255, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(255, 204, 125, 0.14), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
       min-height: 100vh;
     }
 
     .wrap {
-      max-width: 1380px;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 28px 18px 48px;
+      padding: 20px 14px 44px;
     }
 
-    .hero, .panel {
+    .hero,
+    .panel,
+    .worker-card,
+    .purchase-card {
       background: var(--panel);
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
@@ -46,34 +51,41 @@
     }
 
     .hero {
+      padding: 24px;
       border-radius: 28px;
-      padding: 28px;
-      overflow: hidden;
       position: relative;
+      overflow: hidden;
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      inset: auto -120px -120px auto;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(157, 216, 255, 0.18), transparent 62%);
+      right: -80px;
+      bottom: -120px;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(130, 207, 255, 0.18), transparent 64%);
       pointer-events: none;
     }
 
-    h1, h2, h3, p { margin: 0; }
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
     h1 {
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      max-width: 11ch;
+      font-size: clamp(2rem, 7vw, 4.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      max-width: 8ch;
     }
 
     .lede {
-      margin-top: 12px;
-      max-width: 78ch;
+      margin-top: 14px;
+      max-width: 68ch;
       color: var(--muted);
       line-height: 1.6;
       font-size: 1rem;
@@ -81,60 +93,55 @@
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-      margin-top: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 22px;
     }
 
     .stat {
       background: var(--panel-2);
       border: 1px solid var(--line);
       border-radius: 20px;
-      padding: 16px;
+      padding: 14px;
     }
 
     .stat .label {
-      color: var(--muted);
+      font-size: 0.74rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      font-size: 0.75rem;
+      color: var(--muted);
     }
 
     .stat .value {
       margin-top: 6px;
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 700;
     }
 
     .toolbar {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(180px, 0.8fr));
       gap: 12px;
-      flex-wrap: wrap;
-      margin: 18px 0 14px;
+      margin-top: 18px;
     }
 
-    .toolbar input, .toolbar select {
+    .toolbar input,
+    .toolbar select {
+      width: 100%;
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 16px;
       background: rgba(255, 255, 255, 0.04);
       color: var(--text);
-      padding: 12px 14px;
+      padding: 13px 14px;
       font: inherit;
-    }
-
-    .toolbar input {
-      flex: 1 1 320px;
-    }
-
-    .toolbar select {
-      min-width: 190px;
+      min-width: 0;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: 1.35fr 0.75fr;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.8fr);
       gap: 16px;
-      align-items: start;
+      margin-top: 16px;
     }
 
     .panel {
@@ -147,28 +154,77 @@
       margin-bottom: 12px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .worker-grid,
+    .purchase-grid {
+      display: grid;
+      gap: 12px;
     }
 
-    th, td {
-      text-align: left;
-      padding: 14px 10px;
-      border-bottom: 1px solid var(--line);
-      vertical-align: top;
+    .worker-card,
+    .purchase-card {
+      border-radius: 22px;
+      padding: 16px;
     }
 
-    th {
+    .worker-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .worker-id {
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--muted);
+    }
+
+    .worker-name {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: rgba(130, 207, 255, 0.12);
+      border: 1px solid rgba(130, 207, 255, 0.2);
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .worker-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .meta-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    .meta-box .label {
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      font-size: 0.72rem;
+      color: var(--muted);
     }
 
-    .npc-name {
-      font-weight: 700;
-      font-size: 1rem;
+    .meta-box .value {
+      margin-top: 6px;
+      font-weight: 600;
+      line-height: 1.4;
+      word-break: break-word;
     }
 
     .subline {
@@ -178,39 +234,39 @@
       line-height: 1.45;
     }
 
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
     .pill {
       display: inline-block;
       border-radius: 999px;
-      padding: 5px 10px;
-      margin: 4px 6px 0 0;
-      font-size: 0.78rem;
+      padding: 6px 10px;
+      font-size: 0.77rem;
       line-height: 1.2;
-      background: rgba(157, 216, 255, 0.12);
-      border: 1px solid rgba(157, 216, 255, 0.18);
+      background: rgba(130, 207, 255, 0.12);
+      border: 1px solid rgba(130, 207, 255, 0.18);
       color: var(--accent);
     }
 
-    .pill.warn {
-      color: var(--warn);
-      background: rgba(255, 191, 112, 0.1);
-      border-color: rgba(255, 191, 112, 0.2);
+    .pill.warm {
+      color: var(--accent-2);
+      background: rgba(255, 211, 139, 0.1);
+      border-color: rgba(255, 211, 139, 0.2);
     }
 
     .pill.ok {
       color: var(--ok);
-      background: rgba(137, 226, 168, 0.1);
-      border-color: rgba(137, 226, 168, 0.2);
-    }
-
-    .pill.danger {
-      color: var(--danger);
-      background: rgba(255, 141, 141, 0.1);
-      border-color: rgba(255, 141, 141, 0.2);
+      background: rgba(130, 222, 162, 0.1);
+      border-color: rgba(130, 222, 162, 0.2);
     }
 
     .rank-list {
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .rank-item {
@@ -230,58 +286,92 @@
       font-size: 0.88rem;
     }
 
-    .muted {
-      color: var(--muted);
+    .purchase-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
     }
 
-    .empty {
-      padding: 24px;
-      color: var(--muted);
-      text-align: center;
+    .purchase-item {
+      font-weight: 700;
+      font-size: 1rem;
     }
 
-    .purchase-panel {
-      margin-top: 16px;
-    }
-
-    .purchase-table td:nth-child(4),
-    .purchase-table td:nth-child(5) {
+    .purchase-card .value-highlight {
+      color: var(--accent-2);
+      font-weight: 700;
       white-space: nowrap;
     }
 
-    @media (max-width: 1080px) {
+    .empty {
+      padding: 22px;
+      color: var(--muted);
+      text-align: center;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+    }
+
+    @media (max-width: 1040px) {
       .layout {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 860px) {
-      table, thead, tbody, th, td, tr {
-        display: block;
+      .wrap {
+        padding: 14px 10px 32px;
       }
 
-      thead {
-        display: none;
+      .hero,
+      .panel,
+      .worker-card,
+      .purchase-card {
+        border-radius: 20px;
       }
 
-      td {
-        padding: 8px 0;
-        border-bottom: 0;
+      .hero {
+        padding: 18px;
       }
 
-      tr {
-        padding: 14px 10px;
-        border-bottom: 1px solid var(--line);
+      .lede {
+        font-size: 0.95rem;
       }
 
-      td::before {
-        content: attr(data-label);
-        display: block;
-        margin-bottom: 3px;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.72rem;
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .worker-top,
+      .purchase-top {
+        flex-direction: column;
+      }
+
+      .worker-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      h1 {
+        max-width: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 14px;
+      }
+
+      .worker-card,
+      .purchase-card {
+        padding: 14px;
       }
     }
   </style>
@@ -291,86 +381,71 @@
     <section class="hero">
       <h1>US NPC Workforce</h1>
       <p class="lede">
-        This dashboard combines scraped region-detail workforce tables with transaction-derived behavior from the official API.
-        It shows where extracted NPCs work, what they earn, and what buying behavior they leave behind in U.S. logs, with a focus on the workforce currently surfaced on U.S. region pages.
+        A simpler view of the U.S. NPC workforce: NPC number, name, region, employer, wage, and a compact purchase snapshot for the latest captured market activity.
       </p>
       <div class="stats" id="stats"></div>
     </section>
 
     <div class="toolbar">
-      <input id="search" type="search" placeholder="Search by NPC, employer, item bought, region page, or behavior">
+      <input id="search" type="search" placeholder="Search by NPC number, name, employer, item, or region">
       <select id="regionFilter">
-        <option value="">All region pages</option>
+        <option value="">All U.S. regions</option>
       </select>
-      <select id="activityFilter">
-        <option value="">All behavior types</option>
-        <option value="Job wage">Has job wage</option>
-        <option value="Items bought in the market">Buys market items</option>
-        <option value="Import Taxes">Pays import taxes</option>
-        <option value="Currency Exchange">Uses currency exchange</option>
+      <select id="wageFilter">
+        <option value="">All wages</option>
+        <option value="high">Wage 25+</option>
+        <option value="mid">Wage 24</option>
+        <option value="low">Wage 23 and below</option>
       </select>
     </div>
 
     <div class="layout">
       <section class="panel">
-        <h2>Extracted NPCs</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>NPC</th>
-              <th>Employment</th>
-              <th>Wage</th>
-              <th>Placement</th>
-              <th>Behavior</th>
-            </tr>
-          </thead>
-          <tbody id="rows">
-            <tr><td class="empty" colspan="5">Loading report...</td></tr>
-          </tbody>
-        </table>
+        <h2>Workers</h2>
+        <div class="worker-grid" id="rows">
+          <div class="empty">Loading report...</div>
+        </div>
       </section>
 
       <aside class="panel">
         <h2>Top Employers</h2>
         <div class="rank-list" id="employers"></div>
 
-        <h2 style="margin-top: 18px;">Behavior Snapshot</h2>
-        <div class="rank-list" id="behaviors"></div>
+        <h2 style="margin-top: 18px;">Regions</h2>
+        <div class="rank-list" id="regions"></div>
 
         <h2 style="margin-top: 18px;">Highest Wages</h2>
         <div class="rank-list" id="wages"></div>
       </aside>
     </div>
 
-    <section class="panel purchase-panel">
+    <section class="panel" style="margin-top: 16px;">
       <h2>Latest 50 NPC Market Purchases</h2>
-      <table class="purchase-table">
-        <thead>
-          <tr>
-            <th>When</th>
-            <th>NPC</th>
-            <th>Employer</th>
-            <th>Purchase</th>
-            <th>Ledger Value</th>
-          </tr>
-        </thead>
-        <tbody id="purchaseRows">
-          <tr><td class="empty" colspan="5">Loading purchase ledger...</td></tr>
-        </tbody>
-      </table>
+      <div class="purchase-grid" id="purchaseRows">
+        <div class="empty">Loading purchase ledger...</div>
+      </div>
     </section>
   </div>
 
   <script>
+    const REGION_NAMES = {
+      7: "Washington DC",
+      8: "San Francisco",
+      9: "Anchorage",
+      12: "San Antonio",
+      13: "Minneapolis",
+      292: "Miami",
+    };
+
     const rowsEl = document.getElementById("rows");
     const statsEl = document.getElementById("stats");
     const employersEl = document.getElementById("employers");
-    const behaviorsEl = document.getElementById("behaviors");
+    const regionsEl = document.getElementById("regions");
     const wagesEl = document.getElementById("wages");
     const purchaseRowsEl = document.getElementById("purchaseRows");
     const searchEl = document.getElementById("search");
     const regionFilterEl = document.getElementById("regionFilter");
-    const activityFilterEl = document.getElementById("activityFilter");
+    const wageFilterEl = document.getElementById("wageFilter");
     let records = [];
     let purchaseEvents = [];
 
@@ -389,70 +464,36 @@
       return Number.isNaN(date.getTime()) ? value : date.toLocaleString();
     }
 
-    function regionPageLabel(record) {
-      return `Region ${record.region_page_id ?? "?"}`;
+    function formatNumber(value) {
+      if (value == null || value === "") return "n/a";
+      return Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 });
     }
 
-    function activityEntries(record) {
-      return Object.entries(record.recent_activity_counts || {}).sort((a, b) => b[1] - a[1]);
-    }
-
-    function behaviorPills(record) {
-      return activityEntries(record).map(([name, count]) => {
-        let klass = "";
-        if (name === "Job wage") klass = " ok";
-        if (name === "Items bought in the market") klass = " warn";
-        if (name === "Currency Exchange") klass = " danger";
-        return `<span class="pill${klass}">${escapeHtml(name)} x${escapeHtml(count)}</span>`;
-      }).join("");
+    function regionLabel(record) {
+      return REGION_NAMES[record.region_page_id] || `Region ${record.region_page_id ?? "?"}`;
     }
 
     function purchasePills(record) {
-      return (record.recent_market_purchases || []).slice(0, 4).map(purchase => {
+      return (record.recent_market_purchases || []).slice(0, 3).map((purchase) => {
         const qty = purchase.quantity ?? "?";
-        const name = purchase.item_name || `Item ${purchase.item_id ?? "?"}`;
-        return `<span class="pill warn">${escapeHtml(qty)} x ${escapeHtml(name)}</span>`;
+        const itemName = purchase.item_name || `Item ${purchase.item_id ?? "?"}`;
+        return `<span class="pill warm">${escapeHtml(qty)} x ${escapeHtml(itemName)}</span>`;
       }).join("");
     }
 
-    function inferredNotes(record) {
-      const entries = activityEntries(record);
-      if (!entries.length) return "No transaction behavior recovered.";
-
-      const notes = [];
-      if (record.current_wage != null) {
-        notes.push(`Current region wage ${record.current_wage}`);
-      }
-      if (record.estimated_wage_from_transactions != null && record.current_wage != null) {
-        const diff = Math.abs(record.current_wage - record.estimated_wage_from_transactions);
-        if (diff < 0.001) notes.push("Transaction wage matches page wage");
-      }
-      if ((record.recent_activity_counts || {})["Job wage"]) notes.push("Observed direct job wage transactions");
-      if ((record.recent_activity_counts || {})["Items bought in the market"]) notes.push("Observed market buying behavior");
-      if ((record.recent_activity_counts || {})["Import Taxes"]) notes.push("Observed import activity");
-      if ((record.recent_activity_counts || {})["Currency Exchange"]) notes.push("Observed currency exchange");
-      if ((record.recent_market_purchases || []).length) {
-        const latest = record.recent_market_purchases[0];
-        const itemName = latest.item_name || `Item ${latest.item_id ?? "?"}`;
-        notes.push(`Recent purchase ${latest.quantity ?? "?"} x ${itemName}`);
-      }
-
-      return notes.join(". ") || "General VAT/work-tax activity observed.";
-    }
-
     function renderStats(data) {
-      const total = data.length;
-      const avgWage = data.filter(r => r.current_wage != null).reduce((sum, r) => sum + r.current_wage, 0) / Math.max(1, data.filter(r => r.current_wage != null).length);
-      const withJobWage = data.filter(r => (r.recent_activity_counts || {})["Job wage"]).length;
-      const withMarketBuys = data.filter(r => (r.recent_activity_counts || {})["Items bought in the market"]).length;
-      const withPurchaseDetails = data.filter(r => (r.recent_market_purchases || []).length).length;
+      const wageRows = data.filter((row) => row.current_wage != null);
+      const avgWage = wageRows.reduce((sum, row) => sum + row.current_wage, 0) / Math.max(1, wageRows.length);
+      const uniqueEmployers = new Set(data.map((row) => row.working_in)).size;
+      const uniqueRegions = new Set(data.map((row) => regionLabel(row))).size;
+      const withPurchases = data.filter((row) => (row.recent_market_purchase_count || 0) > 0).length;
 
       const cards = [
-        ["Extracted NPCs", total],
+        ["Workers", data.length],
         ["Average Wage", Number.isFinite(avgWage) ? avgWage.toFixed(2) : "n/a"],
-        ["With Job Wage Events", withJobWage],
-        ["With Market Purchases", withMarketBuys],
-        ["With Purchase Details", withPurchaseDetails],
+        ["Employers", uniqueEmployers],
+        ["Regions", uniqueRegions],
+        ["Workers With Purchases", withPurchases],
       ];
 
       statsEl.innerHTML = cards.map(([label, value]) => `
@@ -465,135 +506,127 @@
 
     function renderSidebar(data) {
       const employerCounts = new Map();
-      const behaviorCounts = new Map();
+      const regionCounts = new Map();
 
-      data.forEach(record => {
+      data.forEach((record) => {
         employerCounts.set(record.working_in, (employerCounts.get(record.working_in) || 0) + 1);
-        activityEntries(record).forEach(([name, count]) => {
-          behaviorCounts.set(name, (behaviorCounts.get(name) || 0) + count);
-        });
+        const label = regionLabel(record);
+        regionCounts.set(label, (regionCounts.get(label) || 0) + 1);
       });
 
       const topEmployers = [...employerCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
       employersEl.innerHTML = topEmployers.map(([name, count]) => `
         <div class="rank-item">
           <strong>${escapeHtml(name)}</strong>
-          <span>${escapeHtml(count)} extracted workers</span>
+          <span>${escapeHtml(count)} workers</span>
         </div>
-      `).join("") || `<div class="empty">No employers loaded.</div>`;
+      `).join("") || `<div class="empty">No employer data loaded.</div>`;
 
-      const topBehaviors = [...behaviorCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
-      behaviorsEl.innerHTML = topBehaviors.map(([name, count]) => `
+      const topRegions = [...regionCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
+      regionsEl.innerHTML = topRegions.map(([name, count]) => `
         <div class="rank-item">
           <strong>${escapeHtml(name)}</strong>
-          <span>${escapeHtml(count)} observed transactions</span>
+          <span>${escapeHtml(count)} workers</span>
         </div>
-      `).join("") || `<div class="empty">No behavior data loaded.</div>`;
+      `).join("") || `<div class="empty">No region data loaded.</div>`;
 
       const topWages = [...data].sort((a, b) => (b.current_wage ?? -1) - (a.current_wage ?? -1)).slice(0, 8);
-      wagesEl.innerHTML = topWages.map(record => `
+      wagesEl.innerHTML = topWages.map((record) => `
         <div class="rank-item">
           <strong>${escapeHtml(record.npc_name)}</strong>
-          <span>${escapeHtml(record.current_wage ?? "n/a")} at ${escapeHtml(record.working_in)}</span>
+          <span>Wage ${escapeHtml(formatNumber(record.current_wage))} at ${escapeHtml(record.working_in)}</span>
         </div>
       `).join("") || `<div class="empty">No wage data loaded.</div>`;
     }
 
-    function renderPurchases(data) {
-      if (!purchaseEvents.length) {
-        purchaseRowsEl.innerHTML = `<tr><td class="empty" colspan="5">No NPC purchase events loaded.</td></tr>`;
-        return;
-      }
-
-      const lookup = new Map(data.map(record => [String(record.npc_id), record]));
-      purchaseRowsEl.innerHTML = purchaseEvents.map(event => {
-        const record = lookup.get(String(event.npc_id));
-        const npcName = record?.npc_name || `NPC ${event.npc_id}`;
-        const employer = record?.working_in || "Unknown employer";
-        const itemLabel = `${event.quantity ?? "?"} x ${event.item_name || `Item ${event.item_id ?? "?"}`}`;
-        const quality = event.item_quality != null ? `Q${event.item_quality}` : "Q?";
-        return `
-          <tr>
-            <td data-label="When">
-              <div>${escapeHtml(formatDate(event.created_at))}</div>
-              <div class="subline">Txn ${escapeHtml(event.transaction_id)}</div>
-            </td>
-            <td data-label="NPC">
-              <div class="npc-name">${escapeHtml(npcName)}</div>
-              <div class="subline">ID ${escapeHtml(event.npc_id)}</div>
-            </td>
-            <td data-label="Employer">
-              <div>${escapeHtml(employer)}</div>
-              <div class="subline">${escapeHtml(record ? regionPageLabel(record) : "U.S. workforce")}</div>
-            </td>
-            <td data-label="Purchase">
-              <div>${escapeHtml(itemLabel)}</div>
-              <div class="subline">${escapeHtml(event.item_type || "Unknown type")} · ${escapeHtml(quality)}</div>
-            </td>
-            <td data-label="Ledger Value">
-              <div>${escapeHtml(event.country_ledger_value ?? "n/a")}</div>
-            </td>
-          </tr>
-        `;
-      }).join("");
-    }
-
     function filteredRecords() {
-      const q = searchEl.value.trim().toLowerCase();
+      const query = searchEl.value.trim().toLowerCase();
       const region = regionFilterEl.value;
-      const activity = activityFilterEl.value;
+      const wageBand = wageFilterEl.value;
 
-      return records.filter(record => {
+      return records.filter((record) => {
         if (region && String(record.region_page_id) !== region) return false;
-        if (activity && !(record.recent_activity_counts || {})[activity]) return false;
-        if (!q) return true;
+
+        const wage = Number(record.current_wage ?? -1);
+        if (wageBand === "high" && wage < 25) return false;
+        if (wageBand === "mid" && wage !== 24) return false;
+        if (wageBand === "low" && wage > 23) return false;
+
+        if (!query) return true;
 
         return [
           record.npc_id,
           record.npc_name,
+          regionLabel(record),
           record.working_in,
-          record.region_page_id,
-          record.region_name,
-          record.transaction_summary,
-          ...(record.recent_market_purchases || []).map(p => `${p.item_name || ""} ${p.quantity || ""}`),
-        ].join(" ").toLowerCase().includes(q);
+          ...(record.recent_market_purchases || []).map((purchase) => `${purchase.item_name || ""} ${purchase.quantity || ""}`),
+        ].join(" ").toLowerCase().includes(query);
       });
     }
 
     function renderRows() {
       const data = filteredRecords();
       if (!data.length) {
-        rowsEl.innerHTML = `<tr><td class="empty" colspan="5">No extracted NPCs match the current filters.</td></tr>`;
+        rowsEl.innerHTML = `<div class="empty">No workers match the current filters.</div>`;
         return;
       }
 
-      rowsEl.innerHTML = data.map(record => `
-        <tr>
-          <td data-label="NPC">
-            <div class="npc-name">${escapeHtml(record.npc_name)}</div>
-            <div class="subline">ID ${escapeHtml(record.npc_id)} · ${escapeHtml(regionPageLabel(record))}</div>
-            <div class="subline">Last seen ${escapeHtml(formatDate(record.last_seen_at))}</div>
-          </td>
-          <td data-label="Employment">
-            <div>${escapeHtml(record.working_in)}</div>
-            <div class="subline">Business ID ${escapeHtml(record.business_id ?? "n/a")}</div>
-          </td>
-          <td data-label="Wage">
-            <div>${escapeHtml(record.current_wage ?? "n/a")}</div>
-            <div class="subline">Transaction estimate ${escapeHtml(record.estimated_wage_from_transactions ?? "n/a")}</div>
-          </td>
-          <td data-label="Placement">
-            <div>${escapeHtml(regionPageLabel(record))}</div>
-            <div class="subline">Account region ${escapeHtml(record.region_name || "Unknown")}</div>
-            <div class="subline">${escapeHtml(record.recent_market_purchase_count ?? 0)} recent purchase events captured</div>
-          </td>
-          <td data-label="Behavior">
-            <div class="subline">${escapeHtml(inferredNotes(record))}</div>
-            <div>${behaviorPills(record)}</div>
-            <div>${purchasePills(record)}</div>
-          </td>
-        </tr>
+      rowsEl.innerHTML = data.map((record) => `
+        <article class="worker-card">
+          <div class="worker-top">
+            <div>
+              <div class="worker-id">NPC ${escapeHtml(record.npc_id)}</div>
+              <div class="worker-name">${escapeHtml(record.npc_name)}</div>
+              <div class="subline">${escapeHtml(regionLabel(record))}</div>
+            </div>
+            <div class="badge">Wage ${escapeHtml(formatNumber(record.current_wage))}</div>
+          </div>
+
+          <div class="worker-meta">
+            <div class="meta-box">
+              <div class="label">Working For</div>
+              <div class="value">${escapeHtml(record.working_in)}</div>
+            </div>
+            <div class="meta-box">
+              <div class="label">Worker Number</div>
+              <div class="value">${escapeHtml(record.npc_id)}</div>
+            </div>
+            <div class="meta-box">
+              <div class="label">Recent Purchases</div>
+              <div class="value">${escapeHtml(record.recent_market_purchase_count || 0)} events</div>
+            </div>
+          </div>
+
+          <div class="subline">Last seen in transaction logs: ${escapeHtml(formatDate(record.last_seen_at))}</div>
+          <div class="pill-row">${purchasePills(record) || `<span class="pill">No recent item data</span>`}</div>
+        </article>
       `).join("");
+    }
+
+    function renderPurchases(data) {
+      if (!purchaseEvents.length) {
+        purchaseRowsEl.innerHTML = `<div class="empty">No NPC purchase events loaded.</div>`;
+        return;
+      }
+
+      const recordLookup = new Map(data.map((record) => [String(record.npc_id), record]));
+      purchaseRowsEl.innerHTML = purchaseEvents.map((event) => {
+        const record = recordLookup.get(String(event.npc_id));
+        const region = record ? regionLabel(record) : "U.S. workforce";
+        return `
+          <article class="purchase-card">
+            <div class="purchase-top">
+              <div>
+                <div class="purchase-item">${escapeHtml(event.quantity ?? "?")} x ${escapeHtml(event.item_name || `Item ${event.item_id ?? "?"}`)}</div>
+                <div class="subline">${escapeHtml(record?.npc_name || `NPC ${event.npc_id}`)} | NPC ${escapeHtml(event.npc_id)}</div>
+              </div>
+              <div class="value-highlight">${escapeHtml(formatNumber(event.country_ledger_value))}</div>
+            </div>
+            <div class="subline">${escapeHtml(record?.working_in || "Unknown employer")} | ${escapeHtml(region)}</div>
+            <div class="subline">${escapeHtml(event.item_type || "Unknown type")} | ${escapeHtml(formatDate(event.created_at))}</div>
+          </article>
+        `;
+      }).join("");
     }
 
     async function load() {
@@ -601,11 +634,12 @@
         fetch("output/region_civilians_merged.json", { cache: "no-store" }),
         fetch("output/npc_purchase_events.json", { cache: "no-store" }),
       ]);
+
       records = await recordsResponse.json();
       purchaseEvents = await purchasesResponse.json();
 
-      const regionIds = [...new Set(records.map(r => r.region_page_id).filter(v => v != null))].sort((a, b) => a - b);
-      regionFilterEl.innerHTML = `<option value="">All region pages</option>` + regionIds.map(id => `<option value="${id}">Region ${id}</option>`).join("");
+      const regionIds = [...new Set(records.map((record) => record.region_page_id).filter((value) => value != null))].sort((a, b) => a - b);
+      regionFilterEl.innerHTML = `<option value="">All U.S. regions</option>` + regionIds.map((id) => `<option value="${id}">${escapeHtml(REGION_NAMES[id] || `Region ${id}`)}</option>`).join("");
 
       renderStats(records);
       renderSidebar(records);
@@ -613,11 +647,12 @@
       renderPurchases(records);
     }
 
-    [searchEl, regionFilterEl, activityFilterEl].forEach(el => el.addEventListener("input", renderRows));
-    [regionFilterEl, activityFilterEl].forEach(el => el.addEventListener("change", renderRows));
+    [searchEl, regionFilterEl, wageFilterEl].forEach((element) => element.addEventListener("input", renderRows));
+    [regionFilterEl, wageFilterEl].forEach((element) => element.addEventListener("change", renderRows));
 
-    load().catch(error => {
-      rowsEl.innerHTML = `<tr><td class="empty" colspan="5">Could not load report: ${escapeHtml(error.message)}</td></tr>`;
+    load().catch((error) => {
+      rowsEl.innerHTML = `<div class="empty">Could not load report: ${escapeHtml(error.message)}</div>`;
+      purchaseRowsEl.innerHTML = `<div class="empty">Could not load purchases: ${escapeHtml(error.message)}</div>`;
     });
   </script>
 </body>
