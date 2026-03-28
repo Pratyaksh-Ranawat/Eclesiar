@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>US NPC Report</title>
+  <style>
+    :root {
+      --bg: #f4efe5;
+      --panel: rgba(255, 252, 246, 0.88);
+      --panel-strong: #fffaf2;
+      --ink: #1f2a37;
+      --muted: #5c6b73;
+      --accent: #b55d3d;
+      --accent-soft: #f3d7c8;
+      --border: rgba(31, 42, 55, 0.12);
+      --shadow: 0 24px 50px rgba(42, 31, 20, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(181, 93, 61, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(40, 97, 84, 0.16), transparent 30%),
+        linear-gradient(180deg, #f8f2e9 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      backdrop-filter: blur(12px);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      max-width: 10ch;
+    }
+
+    .sub {
+      margin-top: 14px;
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stat .label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat .value {
+      margin-top: 6px;
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 24px 0 18px;
+    }
+
+    .toolbar input {
+      flex: 1 1 280px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 13px 18px;
+      background: rgba(255, 255, 255, 0.85);
+      font: inherit;
+    }
+
+    .note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #6b3522;
+      font-size: 0.92rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .npc {
+      font-weight: 700;
+      font-size: 1.04rem;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(31, 42, 55, 0.07);
+      color: var(--ink);
+      font-size: 0.82rem;
+      margin: 3px 6px 0 0;
+    }
+
+    .empty {
+      padding: 18px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      tbody td {
+        border: 0;
+        padding: 8px 6px;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>United States NPC Report</h1>
+      <p class="sub">
+        This page reads <code>output/us_npcs.json</code> and shows NPCs observed in United States transaction activity from the official Eclesiar API.
+        Wage is estimated from the latest Work Taxes entry. Employer and company owner stay blank until the API exposes that relationship directly.
+      </p>
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search by NPC name, ID, region, or summary">
+      <div class="note">Employer and owner fields are API-limited right now.</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>NPC</th>
+          <th>Home Region</th>
+          <th>Estimated Wage</th>
+          <th>Workplace</th>
+          <th>Company Owner</th>
+          <th>Summary</th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td class="empty" colspan="6">Loading report...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const statsEl = document.getElementById("stats");
+    const rowsEl = document.getElementById("rows");
+    const searchEl = document.getElementById("search");
+    let records = [];
+
+    function formatDate(value) {
+      if (!value) return "Unknown";
+      const date = new Date(value.replace(" ", "T") + "Z");
+      return Number.isNaN(date.getTime()) ? value : date.toLocaleString();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function renderStats(report) {
+      const cards = [
+        ["Country", report.country.name],
+        ["Expected U.S. Region NPCs", report.counts.expected_from_current_us_regions ?? report.counts.expected_from_regions],
+        ["Recovered NPCs", report.counts.found_in_scanned_transactions ?? report.counts.found_in_recent_transactions],
+        ["Generated", formatDate(report.generated_at)],
+      ];
+
+      statsEl.innerHTML = cards.map(([label, value]) => `
+        <div class="stat">
+          <div class="label">${escapeHtml(label)}</div>
+          <div class="value">${escapeHtml(value)}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderRows() {
+      const query = searchEl.value.trim().toLowerCase();
+      const filtered = records.filter((record) => {
+        if (!query) return true;
+        return [
+          record.npc_id,
+          record.name,
+          record.region_name,
+          record.summary,
+        ].join(" ").toLowerCase().includes(query);
+      });
+
+      if (!filtered.length) {
+        rowsEl.innerHTML = `<tr><td class="empty" colspan="6">No NPCs matched this filter.</td></tr>`;
+        return;
+      }
+
+      rowsEl.innerHTML = filtered.map((record) => {
+        const activityPills = Object.entries(record.recent_activity_counts || {})
+          .slice(0, 3)
+          .map(([name, count]) => `<span class="pill">${escapeHtml(name)} x${escapeHtml(count)}</span>`)
+          .join("");
+
+        return `
+          <tr>
+            <td data-label="NPC">
+              <div class="npc">${escapeHtml(record.name)}</div>
+              <div class="muted">ID ${escapeHtml(record.npc_id)}</div>
+              <div class="muted">Last seen ${escapeHtml(formatDate(record.last_seen_at))}</div>
+            </td>
+            <td data-label="Home Region">
+              <div>${escapeHtml(record.region_name || "Outside current U.S. regions / unknown")}</div>
+              <div class="muted">Region ID ${escapeHtml(record.region_id)}</div>
+              <div class="muted">${record.home_region_is_current_us_region ? "Current U.S. region" : "Observed in U.S. logs, home region not in current U.S. region list"}</div>
+            </td>
+            <td data-label="Estimated Wage">
+              <div>${record.estimated_wage == null ? "Unavailable" : escapeHtml(record.estimated_wage)}</div>
+              <div class="muted">Latest work tax: ${record.latest_work_tax_paid == null ? "n/a" : escapeHtml(record.latest_work_tax_paid)}</div>
+            </td>
+            <td data-label="Workplace">${escapeHtml(record.workplace_name || "Unavailable via official API")}</td>
+            <td data-label="Company Owner">${escapeHtml(record.company_owner_name || "Unavailable via official API")}</td>
+            <td data-label="Summary">
+              <div>${escapeHtml(record.summary)}</div>
+              <div>${activityPills}</div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    async function load() {
+      const response = await fetch("output/us_npcs.json", { cache: "no-store" });
+      const report = await response.json();
+      records = report.npcs || [];
+      renderStats(report);
+      renderRows();
+    }
+
+    searchEl.addEventListener("input", renderRows);
+    load().catch((error) => {
+      rowsEl.innerHTML = `<tr><td class="empty" colspan="6">Could not load output/us_npcs.json: ${escapeHtml(error.message)}</td></tr>`;
+    });
+  </script>
+</body>
+</html>

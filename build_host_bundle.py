@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 ROOT = Path(".")
-SITE_DIR = ROOT / "site"
+SITE_DIR = ROOT / "docs"
 OUTPUT_DIR = ROOT / "output"
 
 SOURCE_FILES = [
@@ -59,7 +59,7 @@ Recommended hosts:
     (SITE_DIR / "README.txt").write_text(readme, encoding="utf-8")
 
     print(f"Built static hosting bundle in {SITE_DIR}")
-    print(f"Open {SITE_DIR / 'index.html'} locally or upload the entire folder to a static host.")
+    print(f"Open {SITE_DIR / 'index.html'} locally or point GitHub Pages at /docs.")
     return 0
 
 

@@ -70,7 +70,7 @@ def main() -> int:
         site_cmd = [sys.executable, "build_host_bundle.py"]
         run_step(4, total_steps, site_cmd, "Build static hosting bundle")
 
-    print("Done. Open npc_work_report.html to review locally, or upload the site folder to a static host.")
+    print("Done. Open npc_work_report.html to review locally, or publish the docs folder with GitHub Pages.")
     return 0
 
 
