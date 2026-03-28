@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-03-28T13:10:00+00:00",
+  "source_report": "output\\us_npcs.json",
+  "nationality_id": 3,
+  "nationality_name": "United States of America",
+  "count": 3,
+  "npcs": [
+    {
+      "npc_id": 5958,
+      "name": "JoeGoatedsauce",
+      "region_id": 12,
+      "region_name": "San Antonio",
+      "region_country_id": 3,
+      "region_country_name": "United States of America",
+      "home_region_is_current_us_region": true,
+      "nationality_id": 3,
+      "nationality_name": "United States of America",
+      "avatar": "https://storage.eclesiar.com/medias/placeholder_user.jpg",
+      "day_of_birth": 89,
+      "last_seen_at": "2026-03-04 13:16:02",
+      "recent_activity_counts": {
+        "Vat Taxes": 9,
+        "Work Taxes": 1
+      },
+      "latest_work_tax_paid": 3.4,
+      "estimated_wage": 17.0,
+      "workplace_name": null,
+      "company_owner_name": null,
+      "summary": "Observed in United States transaction logs. Account region: San Antonio. Account region country: United States of America. Nationality: United States of America. Recent tax activity: Vat Taxes x9, Work Taxes x1. Estimated gross wage from latest Work Taxes: 17.0. Employer/company owner: not exposed by the official API endpoints tested"
+    },
+    {
+      "npc_id": 6979,
+      "name": "spudmon11",
+      "region_id": 17,
+      "region_name": "Guadalajara",
+      "region_country_id": 4,
+      "region_country_name": "Mexico",
+      "home_region_is_current_us_region": false,
+      "nationality_id": 3,
+      "nationality_name": "United States of America",
+      "avatar": "https://storage.eclesiar.com/medias/placeholder_user.jpg",
+      "day_of_birth": 111,
+      "last_seen_at": "2026-03-26 10:09:48",
+      "recent_activity_counts": {
+        "Vat Taxes": 101,
+        "Work Taxes": 23,
+        "Import Taxes": 3,
+        "Items bought in the market": 7,
+        "Job wage": 1
+      },
+      "latest_work_tax_paid": 4.4,
+      "estimated_wage": 22.0,
+      "workplace_name": null,
+      "company_owner_name": null,
+      "summary": "Observed in United States transaction logs. Account region: Guadalajara. Account region country: Mexico. Nationality: United States of America. Recent tax activity: Vat Taxes x101, Work Taxes x23, Items bought in the market x7. Estimated gross wage from latest Work Taxes: 22.0. Employer/company owner: not exposed by the official API endpoints tested"
+    },
+    {
+      "npc_id": 7627,
+      "name": "Juve032",
+      "region_id": 7,
+      "region_name": "Washington DC",
+      "region_country_id": 3,
+      "region_country_name": "United States of America",
+      "home_region_is_current_us_region": true,
+      "nationality_id": 3,
+      "nationality_name": "United States of America",
+      "avatar": "https://storage.eclesiar.com/medias/placeholder_user.jpg",
+      "day_of_birth": 123,
+      "last_seen_at": "2026-03-27 16:33:56",
+      "recent_activity_counts": {
+        "Vat Taxes": 114,
+        "Work Taxes": 24,
+        "Import Taxes": 2,
+        "Items bought in the market": 5
+      },
+      "latest_work_tax_paid": 4.4,
+      "estimated_wage": 22.0,
+      "workplace_name": null,
+      "company_owner_name": null,
+      "summary": "Observed in United States transaction logs. Account region: Washington DC. Account region country: United States of America. Nationality: United States of America. Recent tax activity: Vat Taxes x114, Work Taxes x24, Items bought in the market x5. Estimated gross wage from latest Work Taxes: 22.0. Employer/company owner: not exposed by the official API endpoints tested"
+    }
+  ]
+}
