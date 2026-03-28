@@ -2,5 +2,7 @@
 doc.html
 region_*.html
 output/
+!docs/output/
+!docs/output/**
 __pycache__/
 *.pyc
