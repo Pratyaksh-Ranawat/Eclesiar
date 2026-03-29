@@ -36,10 +36,10 @@
         "npc_id": 8218,
         "npc_name": "Kraig Larkin",
         "npc_profile_path": "/npc/8218",
-        "working_in": "AMERICA F*CK YEAH!!!",
-        "business_path": "/business/13566",
-        "business_id": 13566,
-        "current_wage": 21.3
+        "working_in": "Sosa & Godma's Shotguns",
+        "business_path": "/business/466",
+        "business_id": 466,
+        "current_wage": 25.0
       }
     ]
   },
@@ -62,19 +62,19 @@
         "npc_id": 7430,
         "npc_name": "Consuelo Hirthe",
         "npc_profile_path": "/npc/7430",
-        "working_in": "Xanees Weapons",
-        "business_path": "/business/11828",
-        "business_id": 11828,
-        "current_wage": 22.0
+        "working_in": "Washington DC Plantation",
+        "business_path": "/business/10050",
+        "business_id": 10050,
+        "current_wage": 22.5
       },
       {
         "npc_id": 7485,
         "npc_name": "Prof. Kenya McKenzie",
         "npc_profile_path": "/npc/7485",
-        "working_in": "DC Food Market Control",
-        "business_path": "/business/14437",
-        "business_id": 14437,
-        "current_wage": 21.1
+        "working_in": "MAGA Farm",
+        "business_path": "/business/936",
+        "business_id": 936,
+        "current_wage": 22.0
       },
       {
         "npc_id": 7519,
@@ -231,10 +231,10 @@
         "npc_id": 7627,
         "npc_name": "Dr. Lucienne Effertz",
         "npc_profile_path": "/npc/7627",
-        "working_in": "Xanees Weapons",
-        "business_path": "/business/11828",
-        "business_id": 11828,
-        "current_wage": 22.0
+        "working_in": "Sir Weapon 5",
+        "business_path": "/business/10092",
+        "business_id": 10092,
+        "current_wage": 20.0
       }
     ]
   },
@@ -248,10 +248,10 @@
         "npc_id": 7082,
         "npc_name": "Mr. Esteban Corkery IV",
         "npc_profile_path": "/npc/7082",
-        "working_in": "Washington DC Plantation",
-        "business_path": "/business/10050",
-        "business_id": 10050,
-        "current_wage": 22.5
+        "working_in": "Sexy Sosa Moment",
+        "business_path": "/business/15662",
+        "business_id": 15662,
+        "current_wage": 24.0
       },
       {
         "npc_id": 7347,
@@ -269,16 +269,16 @@
         "working_in": "AMERICA F*CK YEAH!!!",
         "business_path": "/business/13566",
         "business_id": 13566,
-        "current_wage": 21.3
+        "current_wage": 21.5
       },
       {
         "npc_id": 7739,
         "npc_name": "Dr. Jedediah Nicolas III",
         "npc_profile_path": "/npc/7739",
-        "working_in": "Lupo Discount",
-        "business_path": "/business/15307",
-        "business_id": 15307,
-        "current_wage": 22.0
+        "working_in": "Weapon Factory - USA",
+        "business_path": "/business/9837",
+        "business_id": 9837,
+        "current_wage": 25.0
       },
       {
         "npc_id": 8196,

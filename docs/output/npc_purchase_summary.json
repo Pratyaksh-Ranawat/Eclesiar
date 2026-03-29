@@ -2,7 +2,7 @@
   "country_id": 3,
   "target_npc_count": 31,
   "purchase_limit": 50,
-  "pages_scanned": 226,
+  "pages_scanned": 240,
   "matching_transactions_seen": 50,
   "captured_purchase_events": 50,
   "workers_with_purchase_events": 10,
