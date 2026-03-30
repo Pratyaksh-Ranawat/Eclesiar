@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-03-29T10:07:01+00:00",
+  "generated_at": "2026-03-30T02:43:48+00:00",
   "country": {
     "id": 3,
     "name": "United States of America",
     "work_tax_percent": "20"
   },
   "counts": {
-    "expected_from_current_us_regions": 31,
+    "expected_from_current_us_regions": 32,
     "found_in_scanned_transactions": 80,
     "scanned_transaction_pages": 250,
     "scanned_npc_candidates": 80

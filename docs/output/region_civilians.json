@@ -142,10 +142,10 @@
         "npc_id": 7628,
         "npc_name": "Skyla Leuschke",
         "npc_profile_path": "/npc/7628",
-        "working_in": "Four Corners Organic Acres",
-        "business_path": "/business/15541",
-        "business_id": 15541,
-        "current_wage": 22.25
+        "working_in": "Sexy Sosa Moment",
+        "business_path": "/business/15662",
+        "business_id": 15662,
+        "current_wage": 22.5
       },
       {
         "npc_id": 8292,
@@ -195,10 +195,10 @@
         "npc_id": 7329,
         "npc_name": "Hipolito Feest V",
         "npc_profile_path": "/npc/7329",
-        "working_in": "Wild Wheat",
-        "business_path": "/business/8451",
-        "business_id": 8451,
-        "current_wage": 22.0
+        "working_in": "AMERICA F*CK YEAH!!!",
+        "business_path": "/business/13566",
+        "business_id": 13566,
+        "current_wage": 23.0
       },
       {
         "npc_id": 7404,
@@ -213,10 +213,10 @@
         "npc_id": 7469,
         "npc_name": "Jacinthe D'Amore",
         "npc_profile_path": "/npc/7469",
-        "working_in": "Xanees Bread US Q2",
-        "business_path": "/business/14523",
-        "business_id": 14523,
-        "current_wage": 22.0
+        "working_in": "AMERICA F*CK YEAH!!!",
+        "business_path": "/business/13566",
+        "business_id": 13566,
+        "current_wage": 23.0
       },
       {
         "npc_id": 7498,
@@ -266,10 +266,10 @@
         "npc_id": 7402,
         "npc_name": "Chyna Cruickshank",
         "npc_profile_path": "/npc/7402",
-        "working_in": "AMERICA F*CK YEAH!!!",
-        "business_path": "/business/13566",
-        "business_id": 13566,
-        "current_wage": 21.5
+        "working_in": "Xanees Weapons",
+        "business_path": "/business/11828",
+        "business_id": 11828,
+        "current_wage": 23.0
       },
       {
         "npc_id": 7739,
