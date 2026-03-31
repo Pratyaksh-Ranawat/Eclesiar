@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-30T02:43:48+00:00",
+  "generated_at": "2026-03-31T11:50:11+00:00",
   "source_report": "output\\us_npcs.json",
   "nationality_id": 3,
   "nationality_name": "United States of America",
@@ -19,8 +19,8 @@
       "day_of_birth": 111,
       "last_seen_at": "2026-03-26 10:09:48",
       "recent_activity_counts": {
-        "Vat Taxes": 65,
-        "Work Taxes": 16,
+        "Vat Taxes": 62,
+        "Work Taxes": 15,
         "Import Taxes": 1,
         "Items bought in the market": 1
       },
@@ -28,7 +28,7 @@
       "estimated_wage": 22.0,
       "workplace_name": null,
       "company_owner_name": null,
-      "summary": "Observed in United States transaction logs. Account region: Guadalajara. Account region country: Mexico. Nationality: United States of America. Recent tax activity: Vat Taxes x65, Work Taxes x16, Import Taxes x1. Estimated gross wage from latest Work Taxes: 22.0. Employer/company owner: not exposed by the official API endpoints tested"
+      "summary": "Observed in United States transaction logs. Account region: Guadalajara. Account region country: Mexico. Nationality: United States of America. Recent tax activity: Vat Taxes x62, Work Taxes x15, Import Taxes x1. Estimated gross wage from latest Work Taxes: 22.0. Employer/company owner: not exposed by the official API endpoints tested"
     },
     {
       "npc_id": 7627,
@@ -42,17 +42,17 @@
       "nationality_name": "United States of America",
       "avatar": "https://storage.eclesiar.com/medias/placeholder_user.jpg",
       "day_of_birth": 123,
-      "last_seen_at": "2026-03-29 04:18:02",
+      "last_seen_at": "2026-03-31 10:12:01",
       "recent_activity_counts": {
-        "Work Taxes": 19,
-        "Vat Taxes": 74,
+        "Work Taxes": 20,
+        "Vat Taxes": 71,
         "Import Taxes": 1
       },
-      "latest_work_tax_paid": 4.0,
-      "estimated_wage": 20.0,
+      "latest_work_tax_paid": 4.6,
+      "estimated_wage": 23.0,
       "workplace_name": null,
       "company_owner_name": null,
-      "summary": "Observed in United States transaction logs. Account region: Washington DC. Account region country: United States of America. Nationality: United States of America. Recent tax activity: Vat Taxes x74, Work Taxes x19, Import Taxes x1. Estimated gross wage from latest Work Taxes: 20.0. Employer/company owner: not exposed by the official API endpoints tested"
+      "summary": "Observed in United States transaction logs. Account region: Washington DC. Account region country: United States of America. Nationality: United States of America. Recent tax activity: Vat Taxes x71, Work Taxes x20, Import Taxes x1. Estimated gross wage from latest Work Taxes: 23.0. Employer/company owner: not exposed by the official API endpoints tested"
     }
   ]
 }
