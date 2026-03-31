@@ -1,0 +1,1 @@
+python update_all_reports.py --publish

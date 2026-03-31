@@ -2,6 +2,9 @@ import shlex
 import subprocess
 import sys
 from argparse import ArgumentParser
+from datetime import datetime, timezone
+from pathlib import Path
+import json
 
 PUBLISH_PATHS = [
     ".gitignore",
@@ -14,6 +17,27 @@ PUBLISH_PATHS = [
     "update_all_reports.py",
     "docs",
 ]
+
+OUTPUT_DIR = Path("output")
+REPORT_BUILD_META_JSON = OUTPUT_DIR / "report_build_meta.json"
+
+
+def iso_now() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+
+
+def write_report_build_meta(args, fetch_failed: bool) -> None:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "updated_at": iso_now(),
+        "updated_via": "update_all_reports.py",
+        "max_pages": args.max_pages,
+        "regions": args.regions,
+        "skip_site_build": bool(args.skip_site_build),
+        "publish": bool(args.publish),
+        "fetch_failed": fetch_failed,
+    }
+    REPORT_BUILD_META_JSON.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
 def parse_args():
@@ -176,6 +200,8 @@ def main() -> int:
     else:
         print(f"[3/{total_steps}] Extract civilians, merge workforce data, and rebuild purchase ledger", flush=True)
         print("  Skipped because region-page fetching failed.", flush=True)
+
+    write_report_build_meta(args, fetch_failed)
 
     next_step = 4
     if not args.skip_site_build and not fetch_failed:

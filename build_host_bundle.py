@@ -12,6 +12,7 @@ SOURCE_FILES = [
 ]
 
 OUTPUT_FILES = [
+    "report_build_meta.json",
     "region_civilians.json",
     "region_civilians_merged.json",
     "npc_purchase_events.json",

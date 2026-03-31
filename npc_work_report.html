@@ -98,6 +98,19 @@
       margin-top: 22px;
     }
 
+    .updated-stamp {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 16px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      font-size: 0.84rem;
+      letter-spacing: 0.02em;
+    }
+
     .stat {
       background: var(--panel-2);
       border: 1px solid var(--line);
@@ -383,6 +396,7 @@
       <p class="lede">
         A simpler view of the U.S. NPC workforce: NPC number, name, region, employer, wage, and a compact purchase snapshot for the latest captured market activity.
       </p>
+      <div class="updated-stamp" id="updatedStamp">Last updated: Loading...</div>
       <div class="stats" id="stats"></div>
     </section>
 
@@ -439,6 +453,7 @@
 
     const rowsEl = document.getElementById("rows");
     const statsEl = document.getElementById("stats");
+    const updatedStampEl = document.getElementById("updatedStamp");
     const employersEl = document.getElementById("employers");
     const regionsEl = document.getElementById("regions");
     const wagesEl = document.getElementById("wages");
@@ -460,13 +475,28 @@
 
     function formatDate(value) {
       if (!value) return "Unknown";
-      const date = new Date(value.replace(" ", "T") + "Z");
+      const raw = String(value);
+      const normalized = raw.includes("T") ? raw : raw.replace(" ", "T") + "Z";
+      const date = new Date(normalized);
       return Number.isNaN(date.getTime()) ? value : date.toLocaleString();
     }
 
     function formatNumber(value) {
       if (value == null || value === "") return "n/a";
       return Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+
+    async function fetchJsonOrNull(path) {
+      const response = await fetch(path, { cache: "no-store" });
+      if (!response.ok) {
+        return null;
+      }
+      return response.json();
+    }
+
+    function renderUpdatedStamp(meta) {
+      const updatedAt = meta?.updated_at || meta?.generated_at;
+      updatedStampEl.textContent = `Last updated: ${formatDate(updatedAt)}`;
     }
 
     function regionLabel(record) {
@@ -635,17 +665,21 @@
     }
 
     async function load() {
-      const [recordsResponse, purchasesResponse] = await Promise.all([
+      const [recordsResponse, purchasesResponse, summaryResponse, buildMeta] = await Promise.all([
         fetch("output/region_civilians_merged.json", { cache: "no-store" }),
         fetch("output/npc_purchase_events.json", { cache: "no-store" }),
+        fetch("output/npc_purchase_summary.json", { cache: "no-store" }),
+        fetchJsonOrNull("output/report_build_meta.json"),
       ]);
 
       records = await recordsResponse.json();
       purchaseEvents = await purchasesResponse.json();
+      const purchaseSummary = await summaryResponse.json();
 
       const regionIds = [...new Set(records.map((record) => record.region_page_id).filter((value) => value != null))].sort((a, b) => a - b);
       regionFilterEl.innerHTML = `<option value="">All U.S. regions</option>` + regionIds.map((id) => `<option value="${id}">${escapeHtml(REGION_NAMES[id] || `Region ${id}`)}</option>`).join("");
 
+      renderUpdatedStamp(buildMeta.updated_at ? buildMeta : purchaseSummary);
       renderStats(records);
       renderSidebar(records);
       renderRows();
@@ -656,6 +690,7 @@
     [regionFilterEl, wageFilterEl].forEach((element) => element.addEventListener("change", renderRows));
 
     load().catch((error) => {
+      updatedStampEl.textContent = "Last updated: unavailable";
       rowsEl.innerHTML = `<div class="empty">Could not load report: ${escapeHtml(error.message)}</div>`;
       purchaseRowsEl.innerHTML = `<div class="empty">Could not load purchases: ${escapeHtml(error.message)}</div>`;
     });

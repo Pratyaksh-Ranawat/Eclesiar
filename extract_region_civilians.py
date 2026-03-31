@@ -2,6 +2,7 @@ import json
 import os
 import re
 import time
+from datetime import datetime, timezone
 from html import unescape
 from pathlib import Path
 from typing import Any
@@ -23,6 +24,10 @@ COUNTRY_ID = 3
 PURCHASE_LIMIT = 50
 MAX_TRANSACTION_SCAN_PAGES = 400
 REQUEST_DELAY_SECONDS = 0.05
+
+
+def iso_now() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
 def load_dotenv(path: Path = Path(".env")) -> None:
@@ -357,6 +362,7 @@ def main() -> int:
     purchases: list[dict[str, Any]] = []
     purchases_by_npc: dict[int, list[dict[str, Any]]] = {}
     purchase_summary: dict[str, Any] = {
+        "generated_at": iso_now(),
         "country_id": COUNTRY_ID,
         "target_npc_count": len({row["npc_id"] for row in merged}),
         "purchase_limit": PURCHASE_LIMIT,
@@ -370,6 +376,7 @@ def main() -> int:
     }
     if api_key:
         purchases, purchases_by_npc, purchase_summary = collect_purchase_events(api_key, {row["npc_id"] for row in merged})
+        purchase_summary["generated_at"] = iso_now()
 
     for row in merged:
         npc_purchases = purchases_by_npc.get(row["npc_id"], [])
