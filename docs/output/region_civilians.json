@@ -9,28 +9,28 @@
         "npc_id": 7483,
         "npc_name": "Mr. Johann Becker Sr.",
         "npc_profile_path": "/npc/7483",
-        "working_in": "Sosa & Godma's Shotguns",
-        "business_path": "/business/466",
-        "business_id": 466,
-        "current_wage": 23.5
+        "working_in": "Sosa Farm of Revenge",
+        "business_path": "/business/8157",
+        "business_id": 8157,
+        "current_wage": 25.0
       },
       {
         "npc_id": 7484,
         "npc_name": "Webster D'Amore II",
         "npc_profile_path": "/npc/7484",
-        "working_in": "bread",
-        "business_path": "/business/5828",
-        "business_id": 5828,
-        "current_wage": 23.0
+        "working_in": "MAGA Farm",
+        "business_path": "/business/936",
+        "business_id": 936,
+        "current_wage": 25.0
       },
       {
         "npc_id": 8024,
         "npc_name": "Sid Bogan III",
         "npc_profile_path": "/npc/8024",
-        "working_in": "Four Corners Organic Acres",
-        "business_path": "/business/15541",
-        "business_id": 15541,
-        "current_wage": 22.75
+        "working_in": "AMERICA F*CK YEAH!!!",
+        "business_path": "/business/13566",
+        "business_id": 13566,
+        "current_wage": 23.1
       },
       {
         "npc_id": 8218,
@@ -62,46 +62,46 @@
         "npc_id": 7430,
         "npc_name": "Consuelo Hirthe",
         "npc_profile_path": "/npc/7430",
-        "working_in": "Washington DC Plantation",
-        "business_path": "/business/10050",
-        "business_id": 10050,
-        "current_wage": 22.5
+        "working_in": "AMERICA F*CK YEAH!!!",
+        "business_path": "/business/13566",
+        "business_id": 13566,
+        "current_wage": 23.1
       },
       {
         "npc_id": 7485,
         "npc_name": "Prof. Kenya McKenzie",
         "npc_profile_path": "/npc/7485",
-        "working_in": "Xanees Bread US Q2",
-        "business_path": "/business/14523",
-        "business_id": 14523,
-        "current_wage": 23.0
+        "working_in": "Sexy Sosa Moment",
+        "business_path": "/business/15662",
+        "business_id": 15662,
+        "current_wage": 25.0
       },
       {
         "npc_id": 7519,
         "npc_name": "Keeley Ryan",
         "npc_profile_path": "/npc/7519",
-        "working_in": "Lupo Foods",
-        "business_path": "/business/13140",
-        "business_id": 13140,
-        "current_wage": 23.0
+        "working_in": "Xanees Bread US Q2",
+        "business_path": "/business/14523",
+        "business_id": 14523,
+        "current_wage": 23.1
       },
       {
         "npc_id": 7816,
         "npc_name": "Rasheed Collier",
         "npc_profile_path": "/npc/7816",
-        "working_in": "Sosa Farm of Revenge",
-        "business_path": "/business/8157",
-        "business_id": 8157,
-        "current_wage": 23.5
+        "working_in": "Sosa for Silphuim Productions",
+        "business_path": "/business/2998",
+        "business_id": 2998,
+        "current_wage": 25.0
       },
       {
         "npc_id": 8195,
         "npc_name": "Prof. Elmore Jacobson III",
         "npc_profile_path": "/npc/8195",
-        "working_in": "Air Q4",
-        "business_path": "/business/5351",
-        "business_id": 5351,
-        "current_wage": 23.5
+        "working_in": "Xanees Weapons",
+        "business_path": "/business/11828",
+        "business_id": 11828,
+        "current_wage": 24.0
       }
     ]
   },
@@ -115,37 +115,37 @@
         "npc_id": 7328,
         "npc_name": "Kathleen Kunze MD",
         "npc_profile_path": "/npc/7328",
-        "working_in": "SIG Sauer",
-        "business_path": "/business/2169",
-        "business_id": 2169,
-        "current_wage": 25.0
+        "working_in": "Air Q4",
+        "business_path": "/business/5351",
+        "business_id": 5351,
+        "current_wage": 24.0
       },
       {
         "npc_id": 7444,
         "npc_name": "Dr. Darlene Armstrong DDS",
         "npc_profile_path": "/npc/7444",
-        "working_in": "Sosta Iron",
-        "business_path": "/business/3461",
-        "business_id": 3461,
-        "current_wage": 24.0
+        "working_in": "Washington DC Plantation",
+        "business_path": "/business/10050",
+        "business_id": 10050,
+        "current_wage": 25.0
       },
       {
         "npc_id": 7626,
         "npc_name": "Frida Hoppe",
         "npc_profile_path": "/npc/7626",
-        "working_in": "Q5 Food",
-        "business_path": "/business/8067",
-        "business_id": 8067,
-        "current_wage": 23.1
+        "working_in": "Washington DC Plantation",
+        "business_path": "/business/10050",
+        "business_id": 10050,
+        "current_wage": 25.0
       },
       {
         "npc_id": 7628,
         "npc_name": "Skyla Leuschke",
         "npc_profile_path": "/npc/7628",
-        "working_in": "Wild Wheat",
-        "business_path": "/business/8451",
-        "business_id": 8451,
-        "current_wage": 23.0
+        "working_in": "Q5 Food",
+        "business_path": "/business/8067",
+        "business_id": 8067,
+        "current_wage": 25.0
       },
       {
         "npc_id": 8292,
@@ -160,10 +160,10 @@
         "npc_id": 8294,
         "npc_name": "Kimberly Brakus",
         "npc_profile_path": "/npc/8294",
-        "working_in": "\u0410\u04103",
-        "business_path": "/business/13795",
-        "business_id": 13795,
-        "current_wage": 23.0
+        "working_in": "Sosa Iron #2",
+        "business_path": "/business/9485",
+        "business_id": 9485,
+        "current_wage": 25.0
       }
     ]
   },
@@ -177,28 +177,19 @@
         "npc_id": 7039,
         "npc_name": "Jayne Leannon",
         "npc_profile_path": "/npc/7039",
-        "working_in": "Xanees Bread US Q2",
-        "business_path": "/business/14523",
-        "business_id": 14523,
-        "current_wage": 23.0
-      },
-      {
-        "npc_id": 7081,
-        "npc_name": "Lyda Grady",
-        "npc_profile_path": "/npc/7081",
-        "working_in": "Milk",
-        "business_path": "/business/15630",
-        "business_id": 15630,
-        "current_wage": 23.0
+        "working_in": "Xanees Grain 2",
+        "business_path": "/business/15068",
+        "business_id": 15068,
+        "current_wage": 24.0
       },
       {
         "npc_id": 7329,
         "npc_name": "Hipolito Feest V",
         "npc_profile_path": "/npc/7329",
-        "working_in": "AMERICA F*CK YEAH!!!",
-        "business_path": "/business/13566",
-        "business_id": 13566,
-        "current_wage": 23.0
+        "working_in": "SIG Sauer",
+        "business_path": "/business/2169",
+        "business_id": 2169,
+        "current_wage": 25.0
       },
       {
         "npc_id": 7404,
@@ -213,28 +204,28 @@
         "npc_id": 7469,
         "npc_name": "Jacinthe D'Amore",
         "npc_profile_path": "/npc/7469",
-        "working_in": "AMERICA F*CK YEAH!!!",
-        "business_path": "/business/13566",
-        "business_id": 13566,
-        "current_wage": 23.0
+        "working_in": "Sosa Oysters",
+        "business_path": "/business/15644",
+        "business_id": 15644,
+        "current_wage": 24.0
       },
       {
         "npc_id": 7498,
         "npc_name": "Prof. Abner Goldner Sr.",
         "npc_profile_path": "/npc/7498",
-        "working_in": "\u0410\u04103",
-        "business_path": "/business/13795",
-        "business_id": 13795,
-        "current_wage": 23.0
+        "working_in": "Sosa Iron #2",
+        "business_path": "/business/9485",
+        "business_id": 9485,
+        "current_wage": 25.0
       },
       {
         "npc_id": 7627,
         "npc_name": "Dr. Lucienne Effertz",
         "npc_profile_path": "/npc/7627",
-        "working_in": "Lupo Discount",
-        "business_path": "/business/15307",
-        "business_id": 15307,
-        "current_wage": 23.0
+        "working_in": "DC Minerals Co.",
+        "business_path": "/business/14853",
+        "business_id": 14853,
+        "current_wage": 25.0
       }
     ]
   },
@@ -244,15 +235,6 @@
     "region_name": "Region",
     "rightful_owner": null,
     "civilians": [
-      {
-        "npc_id": 7082,
-        "npc_name": "Mr. Esteban Corkery IV",
-        "npc_profile_path": "/npc/7082",
-        "working_in": "Sexy Sosa Moment",
-        "business_path": "/business/15662",
-        "business_id": 15662,
-        "current_wage": 24.0
-      },
       {
         "npc_id": 7347,
         "npc_name": "Dr. Mia Shanahan DDS",
@@ -266,10 +248,10 @@
         "npc_id": 7402,
         "npc_name": "Chyna Cruickshank",
         "npc_profile_path": "/npc/7402",
-        "working_in": "Xanees Weapons",
-        "business_path": "/business/11828",
-        "business_id": 11828,
-        "current_wage": 23.0
+        "working_in": "Xanees Bread US 2 Q2.2",
+        "business_path": "/business/15069",
+        "business_id": 15069,
+        "current_wage": 23.1
       },
       {
         "npc_id": 7739,
@@ -284,10 +266,10 @@
         "npc_id": 8196,
         "npc_name": "Mr. Horacio Beahan",
         "npc_profile_path": "/npc/8196",
-        "working_in": "Washington DC Plantation",
-        "business_path": "/business/10050",
-        "business_id": 10050,
-        "current_wage": 22.5
+        "working_in": "Xanees Bread US 2 Q2.2",
+        "business_path": "/business/15069",
+        "business_id": 15069,
+        "current_wage": 23.1
       }
     ]
   },
@@ -301,18 +283,18 @@
         "npc_id": 7443,
         "npc_name": "Carlee Hessel",
         "npc_profile_path": "/npc/7443",
-        "working_in": "NotDarks' Titanium",
-        "business_path": "/business/6588",
-        "business_id": 6588,
-        "current_wage": 23.5
+        "working_in": "Milk",
+        "business_path": "/business/15630",
+        "business_id": 15630,
+        "current_wage": 25.0
       },
       {
         "npc_id": 7701,
         "npc_name": "Dr. Brenda Collins",
         "npc_profile_path": "/npc/7701",
-        "working_in": "DC Minerals Co.",
-        "business_path": "/business/14853",
-        "business_id": 14853,
+        "working_in": "bread",
+        "business_path": "/business/5828",
+        "business_id": 5828,
         "current_wage": 25.0
       },
       {

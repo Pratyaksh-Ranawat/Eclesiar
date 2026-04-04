@@ -1,13 +1,13 @@
 {
   "country_id": 3,
-  "target_npc_count": 32,
+  "target_npc_count": 30,
   "purchase_limit": 50,
-  "pages_scanned": 262,
+  "pages_scanned": 294,
   "matching_transactions_seen": 50,
   "captured_purchase_events": 50,
-  "workers_with_purchase_events": 10,
+  "workers_with_purchase_events": 9,
   "newest_purchase_at": "2026-03-21 13:21:02",
-  "oldest_purchase_at": "2026-03-11 09:48:08",
+  "oldest_purchase_at": "2026-03-11 09:37:56",
   "note": "This is the most recent recovered slice of matching NPC market-purchase events from the scanned country transaction pages. It does not prove there were no purchases outside this recovered window.",
-  "generated_at": "2026-03-31T11:52:18+00:00"
+  "generated_at": "2026-04-04T09:28:34+00:00"
 }

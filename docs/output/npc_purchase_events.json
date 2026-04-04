@@ -564,18 +564,6 @@
     "item_type": "FOOD"
   },
   {
-    "npc_id": 7081,
-    "transaction_id": 18262373,
-    "created_at": "2026-03-11 13:42:03",
-    "item_id": 4,
-    "quantity": 12,
-    "country_ledger_value": 7.92,
-    "description": "Items bought in the market",
-    "item_name": "Food",
-    "item_quality": 3,
-    "item_type": "FOOD"
-  },
-  {
     "npc_id": 7498,
     "transaction_id": 18256048,
     "created_at": "2026-03-11 09:53:20",
@@ -594,6 +582,18 @@
     "item_id": 4,
     "quantity": 1,
     "country_ledger_value": 0.66,
+    "description": "Items bought in the market",
+    "item_name": "Food",
+    "item_quality": 3,
+    "item_type": "FOOD"
+  },
+  {
+    "npc_id": 7498,
+    "transaction_id": 18255504,
+    "created_at": "2026-03-11 09:37:56",
+    "item_id": 4,
+    "quantity": 5,
+    "country_ledger_value": 3.3,
     "description": "Items bought in the market",
     "item_name": "Food",
     "item_quality": 3,
